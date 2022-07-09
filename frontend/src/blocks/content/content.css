@@ -1,0 +1,13 @@
+.content {
+  width: 880px;
+  margin: 0 auto;
+  /* параметр для растягивания блока при отсутствии контента */
+  min-height: 55vh;
+}
+
+@media screen and (max-width: 950px) {
+  .content {
+    width: calc(100% - 38px);
+    min-height: 65vh;
+  }
+}

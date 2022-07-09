@@ -1,0 +1,10 @@
+.places__like {
+  background-image: url(../../../images/heart_empty.svg);
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 19px;
+  background-position: center;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}

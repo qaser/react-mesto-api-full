@@ -1,0 +1,10 @@
+.header__auth {
+    display: flex;
+    margin-top: 18px;
+}
+
+  @media screen and (max-width: 750px) {
+    .header__auth {
+      margin-top: 14px;
+    }
+  }

@@ -1,0 +1,14 @@
+.form__field {
+  margin: 25px 0 0 0;
+  position: relative;
+}
+
+.form__field:first-of-type {
+  margin: 38px 0 0 0;
+}
+
+@media screen and (max-width: 600px) {
+  .form__field:first-of-type {
+    margin: 25px 0 0 0;
+  }
+}

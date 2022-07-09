@@ -1,0 +1,19 @@
+.intro__edit-button {
+  background-image: url(../../../images/Pen.svg);
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  margin-left: 18px;
+  margin-top: 7px;
+}
+
+@media screen and (max-width: 750px) {
+  .intro__edit-button {
+    margin-top: 27px;
+    width: 18px;
+    height: 18px;
+  }
+}

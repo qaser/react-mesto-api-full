@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="5.0270834mm"
+   height="5.2976179mm"
+   viewBox="0 0 5.0270834 5.2976179"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="basket.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.7869809"
+     inkscape:cx="-11.923316"
+     inkscape:cy="-6.3072612"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-154.05343,-163.13581)">
+    <g
+       style="fill:none;stroke:none;stroke-opacity:1"
+       id="g833"
+       transform="matrix(0.26458333,0,0,0.26458333,154.18572,163.2681)"
+       inkscape:export-filename="C:\Users\Алексей\g833.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         d="m 16.7201,1.93002 h -5.14 V 1.27991 C 11.5801,0.568849 11.0113,0 10.3002,0 H 7.72009 C 7.00903,0 6.44018,0.568849 6.44018,1.27991 V 1.93002 H 1.27991 C 0.568849,1.93002 0,2.49887 0,3.20993 0,3.92099 0.568849,4.48984 1.27991,4.48984 H 16.7201 C 17.4312,4.48984 18,3.92099 18,3.20993 18,2.49887 17.4312,1.93002 16.7201,1.93002 Z"
+         fill="#ffffff"
+         id="path824"
+         style="stroke:none;stroke-opacity:1" />
+    </g>
+    <g
+       style="fill:none;stroke:none;stroke-opacity:1"
+       id="g844"
+       transform="matrix(0.26458333,0,0,0.26458333,154.45046,164.51754)"
+       inkscape:export-filename="C:\Users\Алексей\g833.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         d="m 1.45763,13.1422 c 0.06094,0.6704 0.60948,1.158 1.27991,1.158 H 13.2612 c 0.6705,0 1.219,-0.5079 1.2799,-1.158 L 15.7195,0.790039 H 0.279297 Z"
+         fill="#ffffff"
+         id="path835"
+         style="stroke:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

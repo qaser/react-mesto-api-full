@@ -1,0 +1,15 @@
+.auth__subtitle {
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    .auth__subtitle {
+        margin-top: 20px;
+    }
+}

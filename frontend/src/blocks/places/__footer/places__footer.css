@@ -1,0 +1,6 @@
+.places__footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 21px 18px 21px;
+  align-items: center;
+}

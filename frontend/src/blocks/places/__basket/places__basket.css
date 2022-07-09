@@ -1,0 +1,13 @@
+.places__basket {
+  background-image: url(../../../images/basket.svg);
+  width: 18px;
+  height: 19px;
+  background-position: center;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  visibility: hidden;
+}

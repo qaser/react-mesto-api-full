@@ -1,0 +1,11 @@
+.intro {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .intro {
+    justify-content: right;
+    margin-left: 20px;
+  }
+}
