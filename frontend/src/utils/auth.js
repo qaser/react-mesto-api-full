@@ -25,6 +25,7 @@ class Auth {
     authorization({email, password}) {
         return fetch(`${this._address}/signin`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

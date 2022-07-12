@@ -12,13 +12,23 @@ const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env; // Слушаем 3000 порт
+const allowedCors = [
+  'https://huji.students.nomoredomains.xyz',
+  'http://huji.students.nomoredomains.xyz',
+  'http://qaser.ru',
+  'https://qaser.ru',
+];
 const app = express();
 
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: allowedCors,
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
