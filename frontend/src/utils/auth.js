@@ -47,5 +47,5 @@ class Auth {
         .then(this._handleResponse);
     }
 }
-const auth = new Auth('https://qaser.ru');
+const auth = new Auth('http://localhost:3000');
 export default auth;
