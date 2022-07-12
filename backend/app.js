@@ -3,7 +3,7 @@ const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-// const cors = require('./middlewares/cors');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const { registerValid, loginValid } = require('./middlewares/validationJoi');
@@ -18,7 +18,7 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(helmet());
-// app.use(cors());
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
