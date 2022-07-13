@@ -136,7 +136,7 @@ function App() {
         auth.registration(data)
             .then((res) => {
                 if (res) {
-                    history.push('/signin')
+                    history.push('/sign-in')
                     setIsTooltipPopupOpen(true)
                     setMessageTooltip({ message: 'Вы успешно зарегистрировались!', img: successImage })
                 }
@@ -167,7 +167,7 @@ function App() {
     function handleLogout() {
         localStorage.removeItem('jwt');
         setLoggedIn(false);
-        history.push('/signin');
+        history.push('/sign-in');
     }
 
     React.useEffect(() => {
@@ -236,10 +236,10 @@ function App() {
                     onClose={closeAllPopups}
                     messageTooltip={messageTooltip}
                 />
-                <Route path='/signup'>
+                <Route path='/sign-up'>
                     <Register onSubmit={handleSubmitRegistration} />
                 </Route>
-                <Route path='/signin'>
+                <Route path='/sign-in'>
                     <Login onSubmit={handleSubmitAuthorization} />
                 </Route>
         </div>
