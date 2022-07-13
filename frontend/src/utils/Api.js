@@ -109,7 +109,7 @@ export default class Api {
 export const api = new Api({
     baseUrl: apiConfig.url,
     headers: {
-    //   'authorization': apiConfig.token,
+      'authorization': apiConfig.token,
       'Content-Type': 'application/json',
     },
   });
