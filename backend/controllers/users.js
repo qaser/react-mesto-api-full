@@ -4,7 +4,8 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
-const UnauthorizedError = require('../errors/UnauthorizedError');
+// const UnauthorizedError = require('../errors/UnauthorizedError');
+// const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -118,26 +119,47 @@ module.exports.updateUserAvatar = (req, res, next) => {
     });
 };
 
+// module.exports.login = (req, res, next) => {
+//   const { email, password } = req.body;
+//   User.findOne({ email })
+//     .select('+password')
+//     .then((user) => {
+//       if (!user) {
+//         throw new UnauthorizedError('Неверные почта или пароль');
+//       }
+//       return Promise.all([user, bcrypt.compare(password, user.password)]);
+//     })
+//     .then(([user, valid]) => {
+//       if (!valid) {
+//         throw new UnauthorizedError('Неверные почта или пароль');
+//       }
+//       const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
+//         expiresIn: '7d',
+//       });
+//       return res.send({ token });
+//     })
+//     .catch((err) => {
+//       next(err);
+//     });
+// };
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  User.findOne({ email })
-    .select('+password')
+
+  return User.findUserByCredentials(email, password)
     .then((user) => {
-      if (!user) {
-        throw new UnauthorizedError('Неверные почта или пароль');
-      }
-      return Promise.all([user, bcrypt.compare(password, user.password)]);
-    })
-    .then(([user, valid]) => {
-      if (!valid) {
-        throw new UnauthorizedError('Неверные почта или пароль');
-      }
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
-        expiresIn: '7d',
+      const token = jwt.sign(
+        { _id: user._id },
+        'some-secret-key',
+        { expiresIn: '7d' },
+      );
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
       });
-      return res.send({ token });
+      res
+        .status(200)
+        .send({ message: 'Вход выполнен' });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
