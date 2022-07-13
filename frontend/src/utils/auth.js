@@ -10,7 +10,7 @@ class Auth {
     }
 
     registration({email, password}) {
-        return fetch(`${this._address}/sign-up`, {
+        return fetch(`${this._address}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ class Auth {
     }
 
     authorization({email, password}) {
-        return fetch(`${this._address}/sign-in`, {
+        return fetch(`${this._address}/signin`, {
             method: 'POST',
             credentials: 'include',
             headers: {
