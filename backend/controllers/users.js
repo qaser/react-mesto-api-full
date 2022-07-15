@@ -134,16 +134,8 @@ module.exports.login = (req, res, next) => {
       if (!valid) {
         throw new UnauthorizedError('Неверные почта или пароль');
       }
-
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret',
-        { expiresIn: '7d' },
-      );
-      // const { name, userEmail, avatar } = user;
-      return res.send({
-        token,
-      });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      return res.send({ token });
     })
     .catch((err) => {
       next(err);
