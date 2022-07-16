@@ -110,8 +110,7 @@ export const api = new Api({
     baseUrl: apiConfig.url,
     headers: {
     //   'authorization': apiConfig.token,
-      'authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
       'Content-Type': 'application/json',
-      credentials: 'include',
     },
   });
