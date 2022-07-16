@@ -41,8 +41,8 @@ class Auth {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer ${jwt}`,
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${jwt}`,
                 'Content-Type': 'application/json'
             },
         })
