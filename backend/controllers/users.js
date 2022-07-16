@@ -15,9 +15,9 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  User.findById(req.user._id)
+  User.findById(req.user)
     .then((user) => {
-      if (!user._id) {
+      if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
       res.status(200).send(user);
@@ -71,7 +71,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
-      res.status(201).send(user);
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
