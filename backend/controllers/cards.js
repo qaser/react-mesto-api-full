@@ -14,7 +14,7 @@ module.exports.getCards = (_req, res, next) => {
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-  const owner = req.user;
+  const owner = req.user._id;
 
   Card.create({
     name,
@@ -32,11 +32,10 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  console.log(req);
-  Card.findById(req.params)
+  Card.findById(req.params.cardId)
     .orFail(new NotFoundError('Карточка не найдена'))
     .then((card) => {
-      if (req.user !== card.owner.toString()) {
+      if (req.user._id !== card.owner.toString()) {
         throw new ForbiddenError('Вы не можете удалить данную карточку');
       }
       return card.remove();
@@ -54,11 +53,9 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
-  console.log(req);
-  console.log(req.params);
   Card.findByIdAndUpdate(
     req.params,
-    { $addToSet: { likes: req.user } },
+    { $addToSet: { likes: req.user._id } },
     { new: true },
   )
     .orFail(new NotFoundError('Карточка не найдена'))
@@ -75,11 +72,9 @@ module.exports.likeCard = (req, res, next) => {
 };
 
 module.exports.dislikeCard = (req, res, next) => {
-  console.log(req);
-  console.log(req.params);
   Card.findByIdAndUpdate(
-    req.params,
-    { $pull: { likes: req.user } },
+    req.params.cardId,
+    { $pull: { likes: req.user._id } },
     { new: true },
   )
     .orFail(new NotFoundError('Карточка не найдена'))
