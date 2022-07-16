@@ -171,7 +171,7 @@ function App() {
     }
 
     React.useEffect(() => {
-        const jwt = localStorage.getItem('jwt');
+        const jwt = localStorage.checkToken('jwt');
         if (jwt) {
             auth.getUser(jwt)
                 .then((res) => {
@@ -179,8 +179,6 @@ function App() {
                         setEmail(res.email);
                         setLoggedIn(true);
                         history.push('/');
-                    } else {
-                        localStorage.removeItem(jwt);
                     }
                 })
                 .catch(err => console.log(`Ошибка: ${ err }`))

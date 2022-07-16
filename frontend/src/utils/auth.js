@@ -38,13 +38,13 @@ class Auth {
         .then(this._handleResponse);
     }
 
-    getUser(jwt) {
+    checkToken(token) {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                authorization: `Bearer ${jwt}`,
-                'Content-Type': 'application/json',
-                credentials: 'include',
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
         })
         .then(this._handleResponse);
