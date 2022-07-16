@@ -11,7 +11,7 @@ const { createUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001 } = process.env; // Слушаем 3000 порт
+const { PORT = 3000 } = process.env; // Слушаем 3000 порт
 const allowedCors = [
   'https://huji.students.nomoredomains.xyz',
   'http://huji.students.nomoredomains.xyz',
