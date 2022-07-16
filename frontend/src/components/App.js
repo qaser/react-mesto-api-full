@@ -178,9 +178,7 @@ function App() {
                     if(res) {
                         setEmail(res.data.email);
                         setLoggedIn(true);
-                            history.push('/');
-                    } else {
-                            localStorage.removeItem(jwt);
+                        history.push('/');
                     }
                 })
                 .catch(err => console.log(`Ошибка: ${ err }`))
