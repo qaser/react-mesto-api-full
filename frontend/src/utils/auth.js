@@ -43,7 +43,8 @@ class Auth {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                credentials: 'include',
             },
         })
         .then(this._handleResponse);
