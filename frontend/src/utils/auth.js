@@ -42,9 +42,8 @@ class Auth {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
         })
         .then(this._handleResponse);
