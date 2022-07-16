@@ -32,7 +32,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findById(req.params.cardId)
+  Card.findById(req.params)
     .orFail(new NotFoundError('Карточка не найдена'))
     .then((card) => {
       if (req.user !== card.owner.toString()) {
@@ -54,7 +54,7 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
-    req.params.cardId,
+    req.params,
     { $addToSet: { likes: req.user } },
     { new: true },
   )
@@ -73,7 +73,7 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
-    req.params.cardId,
+    req.params,
     { $pull: { likes: req.user } },
     { new: true },
   )
