@@ -109,7 +109,8 @@ export default class Api {
 export const api = new Api({
     baseUrl: apiConfig.url,
     headers: {
-      'authorization': apiConfig.token,
+      credentials: 'include',
+      'authorization': `Bearer ${localStorage.getItem("jwt")}`,
       'Content-Type': 'application/json',
     },
   });

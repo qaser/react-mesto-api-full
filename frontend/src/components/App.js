@@ -181,7 +181,7 @@ function App() {
                         history.push('/');
                     }
                 })
-                .catch(err => console.log(`Ошибка: ${ jwt }`))
+                .catch(err => console.log(`Ошибка: ${ err }`))
             }
     }, [history])
 
