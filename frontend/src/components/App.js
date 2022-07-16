@@ -114,12 +114,16 @@ function App() {
     }
 
     React.useEffect(() => {
-        Promise.all( [api.getInitialCards(), api.getMyProfile()]).then(([cards, userData ])=>{
-            setСurrentUser(userData);
-            setCards(cards);
-        }).catch(err => `Данные не получены: ${ err }`);
+        if (loggedIn) {
+            Promise.all( [api.getInitialCards(), api.getMyProfile()]).then(([cards, userData ])=>{
+                setСurrentUser(userData);
+                setCards(cards);
+                cards.reverse();
+            }).catch(err => `Данные не получены: ${ err }`);
+        }
 
-    }, []);
+
+    }, [loggedIn]);
 
     React.useEffect(() => {
         const closeByEscape = (e) => {
