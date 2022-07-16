@@ -176,9 +176,11 @@ function App() {
             auth.getUser(jwt)
                 .then((res) => {
                     if(res) {
-                        setEmail(res.email);
+                        setEmail(res.data.email);
                         setLoggedIn(true);
                         history.push('/');
+                    } else {
+                        localStorage.removeItem(jwt);
                     }
                 })
                 .catch(err => console.log(`Ошибка: ${ err }`))

@@ -1,3 +1,5 @@
+import { apiConfig } from "./constants";
+
 class Auth {
     constructor(address) {
         this._address = address;
@@ -25,7 +27,6 @@ class Auth {
     authorization({email, password}) {
         return fetch(`${this._address}/signin`, {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -41,13 +42,12 @@ class Auth {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${jwt}`,
+                authorization: `Bearer ${jwt}`,
                 'Content-Type': 'application/json'
             },
         })
         .then(this._handleResponse);
     }
 }
-const auth = new Auth('https://api.qaser.ru');
+const auth = new Auth(apiConfig.url);
 export default auth;

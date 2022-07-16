@@ -1,6 +1,5 @@
 {
-  "homepage": "/",
-  "name": "mesto-react-full",
+  "name": "mesto-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
