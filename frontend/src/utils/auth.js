@@ -1,5 +1,3 @@
-import { apiConfig } from "./constants";
-
 class Auth {
     constructor(address) {
         this._address = address;
@@ -38,16 +36,16 @@ class Auth {
         .then(this._handleResponse);
     }
 
-    checkToken(token) {
+    getUser(jwt) {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${jwt}`,
                 'Content-Type': 'application/json'
             },
         })
         .then(this._handleResponse);
     }
 }
-const auth = new Auth(apiConfig.url);
+const auth = new Auth('https://auth.nomoreparties.co');
 export default auth;

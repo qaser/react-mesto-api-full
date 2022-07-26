@@ -6,8 +6,6 @@ const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((user) => res.status(200).send(user))
@@ -15,9 +13,9 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUserMe = (req, res, next) => {
-  User.findById(req.user)
+  User.findById(req.user._id)
     .then((user) => {
-      if (!user) {
+      if (!user._id) {
         throw new NotFoundError('Пользователь не найден');
       }
       res.status(200).send(user);
@@ -32,7 +30,7 @@ module.exports.getUserMe = (req, res, next) => {
 };
 
 module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params)
+  User.findById(req.params.userId)
     .orFail(() => {
       throw new NotFoundError('Пользователь не найден');
     })
@@ -71,7 +69,7 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
-      res.status(200).send(user);
+      res.status(201).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -91,7 +89,7 @@ module.exports.updateUser = (req, res, next) => {
       throw new NotFoundError('Пользователь не найден');
     })
     .then((user) => {
-      res.status(200).send(user);
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -109,7 +107,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       throw new NotFoundError('Пользователь не найден');
     })
     .then((user) => {
-      res.status(200).send(user);
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -134,7 +132,9 @@ module.exports.login = (req, res, next) => {
       if (!valid) {
         throw new UnauthorizedError('Неверные почта или пароль');
       }
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
+        expiresIn: '7d',
+      });
       return res.send({ token });
     })
     .catch((err) => {
