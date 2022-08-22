@@ -12,7 +12,8 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, {
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            credentials: true
           },
     })
     .then(this._checkResponse);
@@ -25,7 +26,8 @@ export default class Api {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
       body: JSON.stringify({
         name: name,
@@ -41,7 +43,8 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            credentials: true
           },
     })
       .then(this._checkResponse)
@@ -54,7 +57,8 @@ export default class Api {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
       body: JSON.stringify({
         name: card.name,
@@ -71,7 +75,8 @@ export default class Api {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
     })
         .then(this._checkResponse);
@@ -84,7 +89,8 @@ export default class Api {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
     })
         .then(this._checkResponse);
@@ -97,7 +103,8 @@ export default class Api {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
     })
         .then(this._checkResponse);
@@ -110,7 +117,8 @@ export default class Api {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        credentials: true
       },
       body: JSON.stringify({
         avatar: link,
