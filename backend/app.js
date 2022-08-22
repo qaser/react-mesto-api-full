@@ -23,7 +23,18 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(cors());
+const options = {
+  origin: [
+    'localhost:3000',
+    'http://huji.students.nomoredomains.xyz',
+    'https://huji.students.nomoredomains.xyz',
+    'http://api.huji.students.nomorepartiesxyz.ru',
+    'https://api.huji.students.nomorepartiesxyz.ru',
+  ],
+  credentials: true,
+};
+app.use('*', cors(options));
+// app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
