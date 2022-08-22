@@ -10,10 +10,10 @@ export default class Api {
   // загрузка данных пользователя
   getMyProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
+        credentials: 'include',
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            credentials: true
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
     })
     .then(this._checkResponse);
@@ -24,10 +24,10 @@ export default class Api {
   editMyProfile({name, occupation}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         name: name,
@@ -41,10 +41,10 @@ export default class Api {
   // загрузка карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+        credentials: 'include',
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            credentials: true
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
           },
     })
       .then(this._checkResponse)
@@ -55,10 +55,10 @@ export default class Api {
   addNewCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         name: card.name,
@@ -73,10 +73,10 @@ export default class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
     })
         .then(this._checkResponse);
@@ -87,10 +87,10 @@ export default class Api {
   likeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
     })
         .then(this._checkResponse);
@@ -101,10 +101,10 @@ export default class Api {
   dislikeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
     })
         .then(this._checkResponse);
@@ -115,10 +115,10 @@ export default class Api {
   changeAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        credentials: true
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
         avatar: link,
