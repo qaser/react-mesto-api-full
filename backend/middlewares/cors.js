@@ -3,9 +3,9 @@ const allowedCors = [
   'https://huji.students.nomoredomains.xyz',
   'http://api.huji.students.nomorepartiesxyz.ru',
   'https://api.huji.students.nomorepartiesxyz.ru',
-  'localhost:3000',
-  'localhost:3001',
+  'https://localhost:3000',
   'http://localhost:3000',
+  'https://localhost:3001',
   'http://localhost:3001',
 ];
 
