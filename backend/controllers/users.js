@@ -6,9 +6,11 @@ const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((user) => res.status(200).send(user))
+    .then((users) => res.status(200).send(users))
     .catch((err) => next(err));
 };
 
@@ -89,7 +91,7 @@ module.exports.updateUser = (req, res, next) => {
       throw new NotFoundError('Пользователь не найден');
     })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -107,7 +109,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       throw new NotFoundError('Пользователь не найден');
     })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -132,9 +134,11 @@ module.exports.login = (req, res, next) => {
       if (!valid) {
         throw new UnauthorizedError('Неверные почта или пароль');
       }
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
-        expiresIn: '7d',
-      });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'some-secret',
+        { expiresIn: '7d' },
+      );
       return res.send({ token });
     })
     .catch((err) => {

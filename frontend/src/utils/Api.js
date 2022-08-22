@@ -2,16 +2,18 @@ import { apiConfig } from "./constants";
 
 
 export default class Api {
-  constructor(options) {
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+  constructor(baseUrl) {
+    this._baseUrl = baseUrl;
   }
 
 
   // загрузка данных пользователя
   getMyProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
     })
     .then(this._checkResponse);
   }
@@ -21,7 +23,10 @@ export default class Api {
   editMyProfile({name, occupation}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify({
         name: name,
         about: occupation,
@@ -34,9 +39,12 @@ export default class Api {
   // загрузка карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
     })
-        .then(this._checkResponse);
+      .then(this._checkResponse)
   }
 
 
@@ -44,7 +52,10 @@ export default class Api {
   addNewCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -58,7 +69,10 @@ export default class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
     })
         .then(this._checkResponse);
   }
@@ -68,7 +82,10 @@ export default class Api {
   likeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
     })
         .then(this._checkResponse);
   }
@@ -78,7 +95,10 @@ export default class Api {
   dislikeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
     })
         .then(this._checkResponse);
   }
@@ -88,7 +108,10 @@ export default class Api {
   changeAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify({
         avatar: link,
       }),
@@ -106,10 +129,4 @@ export default class Api {
 }
 
 // создание объекта api
-export const api = new Api({
-    baseUrl: apiConfig.url,
-    headers: {
-      'authorization': apiConfig.token,
-      'Content-Type': 'application/json',
-    },
-  });
+export const api = new Api(apiConfig.url);

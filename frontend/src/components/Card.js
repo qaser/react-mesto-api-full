@@ -10,7 +10,7 @@ function Card(props) {
         `button button_high-transparent places__basket ${isOwn ? 'places__basket_active' : ''}`
     );
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    const isLiked = props.card.likes.some(i => i === currentUser._id);
     const cardLikeButtonClassName = (
         `button button_high-transparent places__like ${isLiked ? 'places__like_active' : ''}`
     );

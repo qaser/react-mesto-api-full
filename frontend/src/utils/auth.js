@@ -1,3 +1,5 @@
+import { apiConfig } from "./constants";
+
 class Auth {
     constructor(address) {
         this._address = address;
@@ -13,6 +15,7 @@ class Auth {
         return fetch(`${this._address}/signup`, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -26,6 +29,7 @@ class Auth {
         return fetch(`${this._address}/signin`, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -36,16 +40,18 @@ class Auth {
         .then(this._handleResponse);
     }
 
-    getUser(jwt) {
+    checkToken(token) {
         return fetch(`${this._address}/users/me`, {
             method: 'GET',
             headers: {
-                authorization: `Bearer ${jwt}`,
+                'Accept': 'application/json',
+                'authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
         })
         .then(this._handleResponse);
     }
 }
-const auth = new Auth('https://auth.nomoreparties.co');
+
+const auth = new Auth(apiConfig.url);
 export default auth;

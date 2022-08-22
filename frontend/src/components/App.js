@@ -17,19 +17,62 @@ import auth from '../utils/auth.js';
 import successImage from '../images/Successful.svg';
 import failImage from '../images/Failed.svg';
 
-
 function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState(null);
-    const [currentUser, setСurrentUser] = React.useState(null);
+    const [currentUser, setCurrentUser] = React.useState(null);
     const [cards, setCards] = React.useState([]);
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [isTooltipPopupOpen, setIsTooltipPopupOpen] = React.useState(false);
     const [messageTooltip, setMessageTooltip] = React.useState({});
     const [email, setEmail] = React.useState('');
     const history = useHistory();
+
+    function handleSubmitAuthorization(data) {
+        auth.authorization(data)
+            .then((res) => {
+                if (res.token) {
+                    localStorage.setItem('token', res.token);
+                    setLoggedIn(true);
+                    setEmail(data.email)
+                    history.push('/')
+                }
+            })
+            .catch((err) => {
+                console.log(`Ошибка: ${ err }`);
+                setIsTooltipPopupOpen(true)
+                setMessageTooltip({ message: 'Что-то пошло не так! Попробуйте ещё раз.', img: failImage })
+            })
+    }
+
+    React.useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            auth.checkToken(token)
+                .then((res) => {
+                    if (res) {
+                        setEmail(res.email);
+                        setLoggedIn(true);
+                        setCurrentUser(res);
+                        history.push('/');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [history])
+
+    React.useEffect(() => {
+        if (loggedIn) {
+            Promise.all([api.getInitialCards(), api.getMyProfile()]).then(([cards, userData])=>{
+                setCurrentUser(userData);
+                setCards(cards.reverse());
+            }).catch(err => `Данные не получены: ${ err }`);
+        }
+    }, [loggedIn])
 
 
     function handleAddPlace({name, link}) {
@@ -43,7 +86,7 @@ function App() {
 
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
         // Отправляем запрос в API и получаем обновлённые данные карточки
         if (isLiked) {
             api.dislikeCard(card._id)
@@ -98,7 +141,7 @@ function App() {
     function handleUpdateUser(currentUser) {
         api.editMyProfile({name: currentUser.name, occupation: currentUser.about})
             .then((userData) => {
-                setСurrentUser(userData);
+                setCurrentUser(userData);
                 closeAllPopups();
             })
             .catch(err => `Данные не получены: ${ err }`);
@@ -107,19 +150,11 @@ function App() {
     function handleUpdateAvatar(avatar) {
         api.changeAvatar(avatar)
             .then((userData) => {
-                setСurrentUser(userData);
+                setCurrentUser(userData);
                 closeAllPopups();
             })
             .catch(err => `Данные не получены: ${ err }`);
     }
-
-    React.useEffect(() => {
-        Promise.all( [api.getInitialCards(), api.getMyProfile()]).then(([cards, userData ])=>{
-            setСurrentUser(userData);
-            setCards(cards);
-        }).catch(err => `Данные не получены: ${ err }`);
-
-    }, []);
 
     React.useEffect(() => {
         const closeByEscape = (e) => {
@@ -149,44 +184,10 @@ function App() {
             })
       }
 
-    function handleSubmitAuthorization(data) {
-        auth.authorization(data)
-            .then((res) => {
-                localStorage.setItem('jwt', res.token);
-                setLoggedIn(true);
-                setEmail(res.email);
-                history.push('/')
-            })
-            .catch((err) => {
-                console.log(`Ошибка: ${ err }`);
-                setIsTooltipPopupOpen(true)
-                setMessageTooltip({ message: 'Что-то пошло не так! Попробуйте ещё раз.', img: failImage })
-            })
-    }
-
     function handleLogout() {
-        localStorage.removeItem('jwt');
+        localStorage.removeItem('token');
         setLoggedIn(false);
-        history.push('/sign-in');
     }
-
-    React.useEffect(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-            auth.getUser(jwt)
-                .then((res) => {
-                    if(res) {
-                        setEmail(res.data.email);
-                        setLoggedIn(true);
-                            history.push('/');
-                    } else {
-                            localStorage.removeItem(jwt);
-                    }
-                })
-                .catch(err => console.log(`Ошибка: ${ err }`))
-            }
-    }, [history])
-
 
     return (
         <CurrentUserContext.Provider value={ currentUser }>
