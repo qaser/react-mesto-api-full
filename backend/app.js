@@ -1,17 +1,17 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const auth = require('./middlewares/auth');
-// const cors = require('./middlewares/cors');
+const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/errorHandler');
 const { registerValid, loginValid } = require('./middlewares/validationJoi');
 const { createUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3001 } = process.env; // Слушаем 3001 порт
+const { PORT = 3000 } = process.env; // Слушаем 3000 порт
 const app = express();
 
 // подключаемся к серверу mongo
@@ -23,7 +23,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(cors());
+app.use(cors);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
