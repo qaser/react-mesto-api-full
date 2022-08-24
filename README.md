@@ -1,5 +1,5 @@
 # react-mesto-api-full
 
-* [Welcome](https://qaser.ru)
-* [Another Address](https://huji.students.nomoredomains.xyz/sign-up)
-* [Backend](https://api.qaser.ru)
+* [Welcome to my site](https://huji.students.nomoredomains.xyz/)
+* [Backend](https://api.huji.students.nomorepartiesxyz.ru)
+* [IP address](158.160.4.162)
