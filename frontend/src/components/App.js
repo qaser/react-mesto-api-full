@@ -105,10 +105,10 @@ function App() {
 
     function handleCardDelete(card) {
         api.deleteCard(card._id)
-            .then(() => {
-                setCards((state) => state.filter((item) => {
-                  return item._id !== card._id;
-                }))
+            .then((res) => {
+                setCards((cards) =>
+                    cards.filter((c) => (c._id !== selectedCard._id ? res : false))
+                );
             })
             .catch(err => `Данные не получены, ошибка: ${ err }`);
     }
